@@ -1,45 +1,62 @@
-import { Form, FormContainer, Input, StyledLabel, SendButton, BackToLoginButton } from "./styled";
+import {
+  Form,
+  FormContainer,
+  Input,
+  StyledLabel,
+  SendButton,
+  BackToLoginButton,
+} from './styled';
 
-function TelaCadastro(props) {
-  const cadastrar = () => {
-    // fluxo de cadastro (ainda veremos)
-    props.mudarTela("TelaPrincipal")
-  }
+function TelaCadastro({ mudarTela, capturaInfosCadastrar }) {
+  const cadastrar = (event) => {
+      capturaInfosCadastrar(event);
+      mudarTela('TelaCadastroEndereco');
+  };
 
   const mostrarTelaLogin = () => {
-    props.mudarTela("TelaLogin")
-  }
+      mudarTela('TelaLogin');
+  };
 
   return (
-    <FormContainer>
-      <h1>Cadastro </h1>
+      <FormContainer>
+          <h1>Cadastro </h1>
 
-      <Form>
-        <StyledLabel htmlFor="titulo">
-          Nome:
-          <Input id="titulo" />
-        </StyledLabel>
+          <Form
+              onSubmit={(event) => {
+                  cadastrar(event);
+              }}
+          >
+              <StyledLabel htmlFor="name">
+                  Nome:
+                  <Input id="name" name="name" />
+              </StyledLabel>
 
-        <StyledLabel htmlFor="foto">
-          E-mail:
-          <Input id="foto" />
-        </StyledLabel>
+              <StyledLabel htmlFor="email">
+                  E-mail:
+                  <Input id="email" name="email" />
+              </StyledLabel>
 
-        <StyledLabel htmlFor="descricao">
-          Senha:
-          <Input id="descricao" />
-        </StyledLabel>
+              <StyledLabel htmlFor="senha">
+                  Senha:
+                  <Input id="senha" name="senha" type="password" />
+              </StyledLabel>
 
-        <StyledLabel htmlFor="descricao">
-          Confirmação da senha:
-          <Input id="descricao" />
-        </StyledLabel>
+              <StyledLabel htmlFor="confirmacao">
+                  Confirmação da senha:
+                  <Input
+                      id="confirmacao"
+                      name="confirmacao"
+                      type="password"
+                  />
+              </StyledLabel>
 
-        <SendButton onClick={cadastrar}>Cadastrar</SendButton>
+              <SendButton type="submit">Cadastrar</SendButton>
 
-        <BackToLoginButton onClick={mostrarTelaLogin}>Já possuo cadastro</BackToLoginButton>
-      </Form>
-    </FormContainer>
+              <BackToLoginButton onClick={mostrarTelaLogin}>
+                  Já possuo cadastro
+              </BackToLoginButton>
+          </Form>
+      </FormContainer>
   );
 }
 
